@@ -1,10 +1,12 @@
 variable "cidrblock" {
   type    = string
+  default = "10.10.0.0/16"
  
 
 }
 variable "tags" {
   type    = list(string)
+  default = [ "app", "db1", "db2" ]
 }
 variable "subnetaz" {
   type    = list(string)
