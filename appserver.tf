@@ -24,11 +24,21 @@ resource "aws_instance" "appserver" {
   key_name                    = aws_key_pair.idrsa.key_name
   vpc_security_group_ids      = [aws_security_group.app.id]
   subnet_id                   = data.aws_subnet.app.id
+  
   tags = {
     Name = "appserver"
   }
 
-  depends_on = [
-    aws_subnet.subnets
-  ]
+  provisioner "local-exec" {
+
+    command = "terraform output -raw > hosts"
+    
+  }
+  provisioner "local-exec" {
+
+    command = "ansible-playbook -i hosts nopcommerce.yml"
+    
+  }
+
+  depends_on = [ aws_subnet.subnets ]
 }
