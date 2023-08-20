@@ -31,7 +31,7 @@ resource "aws_instance" "appserver" {
 
   provisioner "local-exec" {
 
-    command = "terraform output -raw > hosts"
+    command = "terraform output -raw nop_url > hosts"
     
   }
   provisioner "local-exec" {
