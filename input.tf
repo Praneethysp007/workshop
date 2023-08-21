@@ -20,7 +20,7 @@ variable "app_ec2_size" {
 }
 variable "ubuntu_ami_id" {
   type    = string
-  default = "ami-0cea4844b980fe49e"
+  default = "ami-0f5ee92e2d63afc18"
 }
 variable "appsubname" {
   type    = string
