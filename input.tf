@@ -10,7 +10,7 @@ variable "tags" {
 }
 variable "subnetaz" {
   type    = list(string)
-  default = ["eu-north-1a", "eu-north-1b", "eu-north-1a"]
+  default = ["ap-south-1a", "ap-south-1b","ap-south-1c"]
 
 }
 variable "app_ec2_size" {
