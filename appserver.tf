@@ -19,7 +19,6 @@ data "aws_subnet" "app" {
 }
 resource "aws_instance" "appserver" {
   ami                         = var.ubuntu_ami_id
-  associate_public_ip_address = true
   instance_type               = var.app_ec2_size
   key_name                    = aws_key_pair.idrsa.key_name
   vpc_security_group_ids      = [aws_security_group.app.id]
@@ -33,11 +32,12 @@ resource "aws_instance" "appserver" {
 
     command = "terraform output -raw nop_url > hosts"
     
+    on_failure = fail
   }
   provisioner "local-exec" {
 
     command = "ansible-playbook -i hosts nopcommerce.yml"
-    
+ 
   }
 
   depends_on = [ aws_subnet.subnets ]
