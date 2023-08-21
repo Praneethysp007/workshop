@@ -19,6 +19,7 @@ data "aws_subnet" "app" {
 }
 resource "aws_instance" "appserver" {
   ami                         = var.ubuntu_ami_id
+  associate_public_ip_address = true
   instance_type               = var.app_ec2_size
   key_name                    = aws_key_pair.idrsa.key_name
   vpc_security_group_ids      = [aws_security_group.app.id]
@@ -27,6 +28,7 @@ resource "aws_instance" "appserver" {
   tags = {
     Name = "appserver"
   }
+   depends_on = [ aws_vpc.vpc1,aws_subnet.subnets,aws_key_pair.idrsa,aws_internet_gateway.websg_itgw,aws_route.theroute,aws_security_group.app,aws_db_subnet_group.dbsubgroup,aws_db_instance.dbinst ]
 
   provisioner "local-exec" {
 
@@ -39,5 +41,6 @@ resource "aws_instance" "appserver" {
  
   }
 
-  depends_on = [ aws_vpc.vpc1,aws_subnet.subnets,aws_key_pair.idrsa,aws_internet_gateway.websg_itgw,aws_route.theroute,aws_security_group.app,aws_db_subnet_group.dbsubgroup,aws_db_instance.dbinst ]
+  
 }
+
