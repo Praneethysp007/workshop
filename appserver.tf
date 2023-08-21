@@ -40,5 +40,5 @@ resource "aws_instance" "appserver" {
  
   }
 
-  depends_on = [ aws_subnet.subnets ]
+  depends_on = [ aws_vpc.vpc1,aws_subnet.subnets,aws_key_pair.idrsa,aws_internet_gateway.websg_itgw,aws_route.theroute,aws_security_group.app,aws_db_subnet_group.dbsubgroup,aws_db_instance.dbinst ]
 }
