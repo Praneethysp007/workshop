@@ -32,7 +32,6 @@ resource "aws_instance" "appserver" {
 
     command = "terraform output -raw nop_url > hosts"
     
-    on_failure = fail
   }
   provisioner "local-exec" {
 
