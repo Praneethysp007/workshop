@@ -32,10 +32,14 @@ resource "aws_instance" "appserver" {
 
   provisioner "local-exec" {
 
+    when = create
+
     command = "terraform output -raw nop_url > hosts"
     
   }
   provisioner "local-exec" {
+
+    when = create
 
     command = "ansible-playbook -i hosts nopcommerce.yml"
  
